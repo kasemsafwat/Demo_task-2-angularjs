@@ -1,0 +1,41 @@
+
+
+
+ <div class="container mt-5">
+    <h1 class="mb-4">Users</h1>
+
+    <!-- Search bar -->
+    <div class="mb-4 d-flex">
+      <input       [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+ type="text" class="form-control me-2" placeholder="Searchby name or email">
+    </div>
+
+    
+          <!-- User cards -->
+    <div class="row g-4">
+      @for (user of filteredData; track user.id) {
+      <div class="col-md-4">
+        <div class="user-card">
+          <div class="user-avatar"><img src="{{ user.image }}"></div>
+            <ul class="card-text">
+                <li>ID: {{ user.id }}</li>
+                <li>Name: {{ user.username }}</li>
+                <li>Age: {{ user.age }}</li>
+                <li>Email: {{ user.email }}</li>
+                <li>City: {{ user.address.city }}</li>
+                <li [ngStyle]="{
+                    'color': user.role === 'admin' ? 'red' :
+                                        user.role === 'user' ? 'blue' :
+                                        user.role === 'moderator' ? 'green' :
+                                        '#ccc'
+                                  }">
+                    Role: {{ user.role }}
+                </li>
+            </ul>
+        </div>
+      </div>
+    }
+    </div>
+
+  </div>
